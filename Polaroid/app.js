@@ -19,27 +19,27 @@ app.set('port', 8080);
 app.set('host', 'localhost');
 
 app.use(require('connect-multiparty')({
-	uploadDir: __dirname + '/App/temp'
+    uploadDir: __dirname + '/App/temp'
 }));
 app.use(require('body-parser')({
-	limit: 5 * mb
+    limit: 5 * mb
 }));
 app.use(require('cookie-parser')(hash));
 app.use(require('cookie-session')({
-	secret: hash
+    secret: hash
 }));
 app.use(require('express-session')({
-	secret: hash
-	/*cookie: { secure: true }*/
+    secret: hash
+    /*cookie: { secure: true }*/
 }));
 //app.use(app.router);
 
 // https server
 var options = {
-	key: fs.readFileSync('./cert/server.key'),
-	cert: fs.readFileSync('./cert/server.crt')
+    key: fs.readFileSync('./cert/server.key'),
+    cert: fs.readFileSync('./cert/server.crt')
 };
-	
+    
 routing(app);
 app.use(express.static(path));
 app.set('https-server', https.createServer(options, app).listen(43443, app.get('host')));

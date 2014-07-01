@@ -12,7 +12,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>83aac9f6-1094-40fc-8ce9-2ca0fe8ccbac</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -31,21 +32,80 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="routes\index.js" />
-    <Compile Include="routes\user.js" />
-    <Content Include="package.json" />
-    <Content Include="public\stylesheets\style.styl" />
-    <Content Include="README.md" />
-    <Content Include="views\index.jade" />
-    <Content Include="views\layout.jade" />
+    <Compile Include="App\facade.js" />
+    <Compile Include="App\modules\BL\Authentication.js" />
+    <Compile Include="App\modules\BO\User.js" />
+    <Compile Include="App\modules\DAL\DB.js" />
+    <Compile Include="App\modules\Utility.js" />
+    <Compile Include="App\public\js\error_validation.js" />
+    <Compile Include="App\public\js\main.js" />
+    <Compile Include="App\public\js\popup.js" />
+    <Compile Include="App\public\js\profil.js" />
+    <Compile Include="App\public\js\send.js" />
+    <Compile Include="App\public\js\slide-out-menu.js" />
+    <Compile Include="App\public\js\submain.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="public\" />
-    <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
-    <Folder Include="public\stylesheets\" />
-    <Folder Include="routes\" />
-    <Folder Include="views\" />
+    <Content Include="App\public\account\equipment.html" />
+    <Content Include="App\public\account\feeds.html" />
+    <Content Include="App\public\account\find.html" />
+    <Content Include="App\public\account\forgot\index.html" />
+    <Content Include="App\public\account\friends.html" />
+    <Content Include="App\public\account\gallery.html" />
+    <Content Include="App\public\account\gallery_cat.html" />
+    <Content Include="App\public\account\index.html" />
+    <Content Include="App\public\account\myphotos.html" />
+    <Content Include="App\public\account\profile.html" />
+    <Content Include="App\public\account\profile_header.html" />
+    <Content Include="App\public\account\settings.html" />
+    <Content Include="App\public\account\signup\index.html" />
+    <Content Include="App\public\account\upload.html" />
+    <Content Include="App\public\css\gallery.css" />
+    <Content Include="App\public\css\header.css" />
+    <Content Include="App\public\css\polaroidstyle.css" />
+    <Content Include="App\public\css\slide-out-menu.css" />
+    <Content Include="App\public\img\bildchris.jpg" />
+    <Content Include="App\public\img\bilddavid.png" />
+    <Content Include="App\public\img\bildleo.jpg" />
+    <Content Include="App\public\img\bildtom.png" />
+    <Content Include="App\public\img\Red-signin_Long_base_32dp.png" />
+    <Content Include="App\public\index.html" />
+    <Content Include="App\public\reset\index.html" />
+    <Content Include="App\public\test.jpg" />
+    <Content Include="App\public\upload\testuser\original\delete.me" />
+    <Content Include="App\public\upload\testuser\profil\profil.png" />
+    <Content Include="App\public\upload\testuser\profil\wallpaper.png" />
+    <Content Include="App\public\upload\testuser\small\delete.me" />
+    <Content Include="App\temp\delete.me" />
+    <Content Include="cert\server.crt" />
+    <Content Include="cert\server.csr" />
+    <Content Include="cert\server.key" />
+    <Content Include="cert\server.key.org" />
+    <Content Include="mails\delete.me" />
+    <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\" />
+    <Folder Include="App\modules\" />
+    <Folder Include="App\modules\BL\" />
+    <Folder Include="App\modules\DAL\" />
+    <Folder Include="App\modules\BO\" />
+    <Folder Include="App\public\" />
+    <Folder Include="App\public\account\" />
+    <Folder Include="App\public\account\forgot\" />
+    <Folder Include="App\public\account\signup\" />
+    <Folder Include="App\public\css\" />
+    <Folder Include="App\public\img\" />
+    <Folder Include="App\public\js\" />
+    <Folder Include="App\public\reset\" />
+    <Folder Include="App\public\upload\" />
+    <Folder Include="App\public\upload\testuser\" />
+    <Folder Include="App\public\upload\testuser\original\" />
+    <Folder Include="App\public\upload\testuser\profil\" />
+    <Folder Include="App\public\upload\testuser\small\" />
+    <Folder Include="App\temp\" />
+    <Folder Include="cert\" />
+    <Folder Include="mails\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
   <ProjectExtensions>
