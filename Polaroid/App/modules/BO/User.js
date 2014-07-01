@@ -5,6 +5,11 @@ function User() {
     Utility.extend(Subject(), this);
 
     // TODO: Attribute hinzufügen.
+    this.email = '';
+    this.username = '';
+    this.forename = '';
+    this.surname = '';
+    this.status = false;
 }
 
 module.exports = function () {
