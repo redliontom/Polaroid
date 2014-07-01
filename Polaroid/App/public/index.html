@@ -1,96 +1,35 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Polaroid</title>
-	
-	<link href='css/polaroidstyle.css' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-	<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet' type='text/css'>
-
-	<script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
-	<script type="text/javascript">
-    /*(function () {
-      var po = document.createElement('script');
-      po.type = 'text/javascript';
-      po.async = true;
-      po.src = 'https://plus.google.com/js/client:plusone.js?onload=start';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(po, s);
-    })();*/
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1">
+    
+    <meta name="description" content="Polaroid">
+    <meta name="DC.Title" content="polaroid.lu">
+    <meta name="DC.Subject" content="Photography">
+    <meta name="DC.Publisher" content="polaroid.lu">
+    <meta name="DC.Creator" content="Tom Schalbar, David Wolf">
+    <meta name="Keywords" content="Photography, Photos, Photo, Lens, Aperture, Polaroid, Community, Luxembourg, Letzebuerg">
+    <meta name="DC.Language" content="en">
+    
+    <title>Polaroid</title>
+    
+    <link rel="stylesheet" href="css/login.css" >
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700|Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../js/polaroid.js"></script>
 </head>
+
 <body OnLoad="document.login.username.focus();">
-	<div class="error"></div>
-	<div id="box">
-		<div id="box_content">
-			<header id="index_header">
-				<h1><i class="fa fa-camera-retro"></i> polaroid</h1>
-				<h4>A photo community for creative photographers.</h4>
-			</header>
-			<form role="form" name="login" accept-charset="utf-8" onsubmit="return validateForm()" method="post" action="">
-				<input class="input_text" type="text" name="username" value="" placeholder="Username">
-				<input class="input_text" type="password" name="password" value="" placeholder="Password">
-				<p>
-					<input type="checkbox" checked="checked" value="1" name="remember"> Keep me logged in
-					<span class="divider1">
-						<a href="/account/forgot">Forgot your password?</a>
-					</span>
-				</p>
-				<button class="button_submit" type="submit" name="submit">Login</button>
-				<span class="divider2">
-					<a href="/account/signup">Create Your Account</a>
-				</span>
-			</form>
-            <hr class="gray">
-            Or sign in with Google
-
-				<form id="gp_form" method="GET" action="https://accounts.google.com/o/oauth2/auth">
-                    <input type="hidden" name="scope" value="https://www.googleapis.com/auth/plus.login"></input>
-                    <input type="hidden" name="state" value="gpauth"></input>
-                    <input type="hidden" name="redirect_uri" value="http://localhost:8080/gpauth"></input>
-                    <input type="hidden" name="response_type" value="code"></input>
-                    <input type="hidden" name="client_id" value="834016996628-0cnmggv39imegd1mvveu7qmh8aesm93k.apps.googleusercontent.com"></input>
-                    <input type="hidden" name="access_type" value="offline"></input>
-                    <input type="hidden" name="cookiepolicy" value="single_host_origin"></input>
-                    <input type="image" src="img/Red-signin_Long_base_32dp.png" id="google_button" alt="Google+ Sign-In">
-                </form>
-            </div>
-		<footer id="index_footer">
-			polaroid © <script>document.write(new Date().getFullYear())</script> - English
-		</footer>
-	</div>
-	<script src="js/error_validation.js"></script>
-	<script type="text/javascript">
-		function signInCallback(authResult) {
-		 /* if (authResult['code']) {
-
-		    // Nach der Autorisierung des Nutzers nun die Anmeldeschaltfläche ausblenden, zum Beispiel:
-		    $('#signinButton').attr('style', 'display: none');
-
-		    // Senden des Codes an den Server.
-		    $.ajax({
-		      type: 'POST',
-		      url: 'http://localhost:8080/gpauth',
-		      contentType: 'application/json; charset=utf-8',
-		      success: function(result) {
-		        // Behandeln oder Verifizieren der Serverantwort, falls erforderlich.
-		        console.log(result);
-		      },
-		      processData: false,
-		      data: JSON.stringify({'code': authResult['code']})
-		    });
-		  } else if (authResult['error']) {
-		    // Es gab einen Fehler.
-		    // Mögliche Fehlercodes:
-		    //   "access_denied" – Der Nutzer hat den Zugriff für Ihre App abgelehnt.
-		    //   "immediate_failed" – Automatische Anmeldung des Nutzers ist fehlgeschlagen.
-		     console.log('Es gab einen Fehler: ' + authResult['Fehler']);
-		  }*/
-		}
-		</script>
-	<footer class="start">
-		<i class="fa fa-html5"></i> <i class="fa fa-css3"></i>
-	</footer>
+    <div class="frame">
+        <h1><i class="fa fa-camera-retro"></i> polaroid</h1>
+        <h2>A photo community for creative photographers.</h2>
+        <form id="login" name="login" action="" method="post">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="password" name="password" id="password" placeholder="Password">
+        </form>
+    </div>
+    
 </body>
-</html> 
+</html>

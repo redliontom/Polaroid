@@ -32,11 +32,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="App\facade.js" />
-    <Compile Include="App\modules\BL\Authentication.js" />
-    <Compile Include="App\modules\BO\User.js" />
-    <Compile Include="App\modules\DAL\DB.js" />
-    <Compile Include="App\modules\Utility.js" />
+    <Compile Include="App\Facade.js" />
+    <Compile Include="App\Modules\BL.js" />
+    <Compile Include="App\Modules\BO\Account.js" />
+    <Compile Include="App\Modules\BO\Conversation.js" />
+    <Compile Include="App\Modules\BO\Gallery.js" />
+    <Compile Include="App\Modules\BO\Image.js" />
+    <Compile Include="App\Modules\BO\User.js" />
+    <Compile Include="App\Modules\Commands\Authenticate.js" />
+    <Compile Include="App\Modules\Commands\GetSettings.js" />
+    <Compile Include="App\Modules\Commands\SetSettings.js" />
+    <Compile Include="App\Modules\Commands\UploadImage.js" />
+    <Compile Include="App\Modules\DAL.js" />
+    <Compile Include="App\Modules\Patterns\Command.js" />
+    <Compile Include="App\Modules\Patterns\Observer.js" />
+    <Compile Include="App\Modules\Patterns\ObserverList.js" />
+    <Compile Include="App\Modules\Patterns\Subject.js" />
+    <Compile Include="App\Modules\Utility.js" />
     <Compile Include="App\public\js\error_validation.js" />
     <Compile Include="App\public\js\main.js" />
     <Compile Include="App\public\js\popup.js" />
@@ -46,36 +58,13 @@
     <Compile Include="App\public\js\submain.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\public\account\equipment.html" />
-    <Content Include="App\public\account\feeds.html" />
-    <Content Include="App\public\account\find.html" />
-    <Content Include="App\public\account\forgot\index.html" />
-    <Content Include="App\public\account\friends.html" />
-    <Content Include="App\public\account\gallery.html" />
-    <Content Include="App\public\account\gallery_cat.html" />
-    <Content Include="App\public\account\index.html" />
-    <Content Include="App\public\account\myphotos.html" />
-    <Content Include="App\public\account\profile.html" />
-    <Content Include="App\public\account\profile_header.html" />
-    <Content Include="App\public\account\settings.html" />
-    <Content Include="App\public\account\signup\index.html" />
-    <Content Include="App\public\account\upload.html" />
+    <Content Include="App\public\acc\files\feed.html" />
+    <Content Include="App\public\acc\index.html" />
     <Content Include="App\public\css\gallery.css" />
     <Content Include="App\public\css\header.css" />
     <Content Include="App\public\css\polaroidstyle.css" />
     <Content Include="App\public\css\slide-out-menu.css" />
-    <Content Include="App\public\img\bildchris.jpg" />
-    <Content Include="App\public\img\bilddavid.png" />
-    <Content Include="App\public\img\bildleo.jpg" />
-    <Content Include="App\public\img\bildtom.png" />
-    <Content Include="App\public\img\Red-signin_Long_base_32dp.png" />
     <Content Include="App\public\index.html" />
-    <Content Include="App\public\reset\index.html" />
-    <Content Include="App\public\test.jpg" />
-    <Content Include="App\public\upload\testuser\original\delete.me" />
-    <Content Include="App\public\upload\testuser\profil\profil.png" />
-    <Content Include="App\public\upload\testuser\profil\wallpaper.png" />
-    <Content Include="App\public\upload\testuser\small\delete.me" />
     <Content Include="App\temp\delete.me" />
     <Content Include="cert\server.crt" />
     <Content Include="cert\server.csr" />
@@ -86,23 +75,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\" />
-    <Folder Include="App\modules\" />
-    <Folder Include="App\modules\BL\" />
-    <Folder Include="App\modules\DAL\" />
-    <Folder Include="App\modules\BO\" />
+    <Folder Include="App\Modules\" />
+    <Folder Include="App\Modules\BO\" />
+    <Folder Include="App\Modules\Commands\" />
+    <Folder Include="App\Modules\Patterns\" />
     <Folder Include="App\public\" />
-    <Folder Include="App\public\account\" />
-    <Folder Include="App\public\account\forgot\" />
-    <Folder Include="App\public\account\signup\" />
+    <Folder Include="App\public\acc\" />
+    <Folder Include="App\public\acc\files\" />
     <Folder Include="App\public\css\" />
-    <Folder Include="App\public\img\" />
     <Folder Include="App\public\js\" />
-    <Folder Include="App\public\reset\" />
-    <Folder Include="App\public\upload\" />
-    <Folder Include="App\public\upload\testuser\" />
-    <Folder Include="App\public\upload\testuser\original\" />
-    <Folder Include="App\public\upload\testuser\profil\" />
-    <Folder Include="App\public\upload\testuser\small\" />
     <Folder Include="App\temp\" />
     <Folder Include="cert\" />
     <Folder Include="mails\" />
