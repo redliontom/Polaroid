@@ -1,13 +1,15 @@
-var DB = require('./modules/DAL');
+/*var DB = require('./modules/DAL');
 var fs = require('fs');
 var crypto = require('crypto');
 var mail = require("nodemailer");
 var readline = require('readline');
-var imagemagick = require('imagemagick');
+var imagemagick = require('imagemagick');*/
 
 module.exports = function (app) {
+    var _bl = require('./Modules/BL')();
+
     // Login
-    app.route('/')
+    /*app.route('/')
     .all(redirectToHttps, checkAuthSession, login, function (request, response) {
         response.status(200).sendfile('./App/public/index.html');
     });
@@ -58,10 +60,10 @@ module.exports = function (app) {
     });
 
     // link
-    app.route('/logout').all(redirectToHttps, logout);
+    app.route('/logout').all(redirectToHttps, logout);*/
 };
 
-function logfile(path, message) {
+/*function logfile(path, message) {
     return console.log(message); // TODO: vor Auslieferung das return löschen
     
     fs.open(path, 'a', 0666, function (error, fd) {
@@ -108,7 +110,7 @@ function redirectToHttps(request, response, next) {
         return next();
     } else {
         response.redirect('https://' + request.host + request.path);
-    }*/
+    }
 }
 
 function checkAuthSession(request, response, next) {
@@ -196,9 +198,9 @@ function createAuthSession(request, response, next, username, remember) {
                 if (result) {
                     if (remember) {
                         // TODO: Cookie option 'secure' auf TRUE setzen sobald HTTPS funktioniert.
-                        response.cookie('username', username, { expires: date, signed: true/*, secure: true*/ });
-                        response.cookie('series', series, { expires: date, signed: true/*, secure: true*/ });
-                        response.cookie('token', token, { expires: date, signed: true/*, secure: true*/ });
+                        response.cookie('username', username, { expires: date, signed: true/*, secure: true });
+                        response.cookie('series', series, { expires: date, signed: true/*, secure: true });
+                        response.cookie('token', token, { expires: date, signed: true/*, secure: true });
                     }
 
                     request.session.username = username;
@@ -494,17 +496,6 @@ function randomString(count){
     return value.join('');
 }
 
-/*
-Funktion kapselt die Resize und Crop Funktion.
-
-Der Grund ist dass man den Code auswechseln kann ohne die Uploadlogik ansich zu ändern.
-Falls zb ein anderes Tool wie derzeit ImageMagick verwendet werden soll, dann kann man
-dies tun indem man einfach den nachfolgenden Code ändert.
-
-\param path Pfad zum User-Folder
-\param filename Der derzeitige Dateiname des Bildes
-\param callback Funktion wird bei Fehler oder Erfolg aufgerufen. function (error) { ... }
- */
 function imageResizeCrop(path, filename, callback)
 {
     var original = path + '/original/' + filename;
@@ -626,4 +617,4 @@ function sendSettings(request, response, next) {
             status: row.status
         })
     });
-}
+}*/

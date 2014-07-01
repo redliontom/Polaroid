@@ -1,7 +1,6 @@
-var pg = require('pg');
-var sanitizer = require('sanitizer');
-
 function DataAccessLayer() {
+    var _pg = require('pg');
+    var _sanitizer = require('sanitizer');
 }
 
 module.exports = function () {

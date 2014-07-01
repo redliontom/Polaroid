@@ -1,4 +1,5 @@
 ﻿function BusinessLayer() {
+    var _dal = require('./DAL')();
 };
 
 module.exports = function () {

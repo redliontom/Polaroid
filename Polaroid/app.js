@@ -3,6 +3,7 @@ var https = require('https');
 var http = require('http');
 var fs = require('fs');
 var crypto = require('crypto');
+var bodyParser = require('body-parser');
 
 var app = express();
 var path = __dirname + '/App/public';
@@ -21,15 +22,16 @@ app.set('host', 'localhost');
 app.use(require('connect-multiparty')({
     uploadDir: __dirname + '/App/temp'
 }));
-app.use(require('body-parser')({
-    limit: 5 * mb
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(require('cookie-parser')(hash));
 app.use(require('cookie-session')({
     secret: hash
 }));
 app.use(require('express-session')({
-    secret: hash
+    secret: hash,
+    resave: true,
+    saveUninitialized: true
     /*cookie: { secure: true }*/
 }));
 //app.use(app.router);
