@@ -4,9 +4,9 @@ var Subject = require('../Patterns/Subject');
 function Account() {
     Utility.extend(Subject(), this);
 
-    // TODO: User-Attribute hinzufügen.
+    // TODO: Attribute hinzufügen.
 }
 
-exports.create = function () {
+module.exports = function () {
     return new Account();
 };

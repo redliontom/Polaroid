@@ -1,12 +1,12 @@
 ﻿var Utility = require('../Utility');
 var Subject = require('../Patterns/Subject');
 
-function Picture() {
+function Gallery() {
     Utility.extend(Subject(), this);
 
-    // TODO: User-Attribute hinzufügen.
+    // TODO: Attribute hinzufügen.
 }
 
-exports.create = function () {
-    return new Picture();
+module.exports = function () {
+    return new Gallery();
 };
