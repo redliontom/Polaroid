@@ -6,7 +6,7 @@ var crypto = require('crypto');
 
 var app = express();
 var path = __dirname + '/App/public';
-var routing = require('./App/routing');
+var facade = require('./App/facade');
 
 var sha1 = crypto.createHash('sha1');
 var hash = null;
@@ -40,7 +40,7 @@ var options = {
     cert: fs.readFileSync('./cert/server.crt')
 };
     
-routing(app);
+facade(app);
 app.use(express.static(path));
 app.set('https-server', https.createServer(options, app).listen(43443, app.get('host')));
 app.set('http-server', http.createServer(app).listen(8080, app.get('host')));

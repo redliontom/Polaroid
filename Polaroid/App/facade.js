@@ -1,4 +1,4 @@
-var DB = require('./modules/DB');
+var DB = require('./modules/DAL/DB');
 var fs = require('fs');
 var crypto = require('crypto');
 var mail = require("nodemailer");
