@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var path = __dirname + '/App/public';
-var facade = require('./App/facade');
+var facade = require('./App/Facade');
 
 var sha1 = crypto.createHash('sha1');
 var hash = null;
