@@ -1,11 +1,9 @@
-var DB = require('./modules/DAL/DB');
+var DB = require('./modules/DAL');
 var fs = require('fs');
 var crypto = require('crypto');
 var mail = require("nodemailer");
 var readline = require('readline');
 var imagemagick = require('imagemagick');
-var googleapis = require('googleapis'),
-    OAuth2 = googleapis.auth.OAuth2;
 
 module.exports = function (app) {
     // Login
@@ -56,12 +54,6 @@ module.exports = function (app) {
     // Account
     app.route('/account')
     .all(redirectToHttps, checkAuthSession, account, function (request, response) {
-        response.status(200).sendfile('./App/public/account/index.html');
-    });
-
-    // GPAuth
-    app.route('/gpauth')
-    .all(redirectToHttps, oauth, function (request, response) {
         response.status(200).sendfile('./App/public/account/index.html');
     });
 
@@ -417,64 +409,6 @@ function reset(request, response, next) {
         logilfe('error.log', e);
         return next();
     }
-}
-
-function oauth(request, response, next) {
-    console.log('oauth');
-
-    var client;
-
-    var clientId = '834016996628-0cnmggv39imegd1mvveu7qmh8aesm93k.apps.googleusercontent.com';
-    var clientSecret = 'Bv-fpD5IQDNikoWZialWZo9j';
-    var redirectUrl = 'http://localhost:8080/gpauth';
-    var scope = 'https://www.googleapis.com/auth/plus.login';
-
-    googleapis
-        .discover('plus', 'v1')
-        .execute(function (err, data) {
-            client = data;
-        });
-
-    var oauth2 = new googleapis.OAuth2Client(clientId, clientSecret, redirectUrl);
-    oauth2.getToken(request.query.code, function (err, tokens) {
-        if (!err){
-            oauth2.credentials = tokens;
-            client.plus.people.get({
-                userId: 'me'
-            }).withAuthClient(oauth2)
-              .execute(function (err, gpResult) {
-                if (gpResult) {
-                    DB.checkOAuth(gpResult.id, function (error, result) {
-                        if (error) {
-                            logfile('error.log', error);
-                            return next();
-                        } else {
-                            if (result == 1) {
-                                logfile('info.log', 'user \'' + gpResult.nickname + '\' logged in via google');
-                                createAuthSession(request, response, next, gpResult.nickname, true);		  					
-                            } else {
-                                DB.signUpOAuth(gpResult.name.givenName, gpResult.name.familyName, gpResult.nickname, gpResult.emails[0].value, gpResult.id, function (error, result) {
-                                    if (error) {
-                                        logfile('error.log', error);
-                                        return next();
-                                    } else {
-                                        createAuthSession(request, response, next, gpResult.nickname, true);
-                                        logfile('info.log', 'user \'' + gpResult.nickname + '\' signedup in via google');
-                                    }
-                                });
-                            }
-                        }
-                    });
-                } else {
-                    logfile('error.log', err);
-                    return next();
-                }
-              });
-        }else{
-            logfile('error.log', err);
-            return next();
-        }
-    });
 }
 
 function upload(request, response, next) {

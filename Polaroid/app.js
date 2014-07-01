@@ -44,4 +44,17 @@ facade(app);
 app.use(express.static(path));
 app.set('https-server', https.createServer(options, app).listen(43443, app.get('host')));
 app.set('http-server', http.createServer(app).listen(8080, app.get('host')));
-console.log('Webserver gestartet');
+console.log('Webserver started.');
+console.log('Press any key to end this process.');
+
+var readline = require('readline');
+
+var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+});
+
+rl.on('line', function (cmd) {
+    process.exit();
+});
