@@ -240,6 +240,11 @@ nav.nav a:hover {
     padding-top: 1.0em;
 }
 
+.table_header {
+    font-weight: 400;
+}
+
+
 /* News Feed */
 .feed {
     position: relative;

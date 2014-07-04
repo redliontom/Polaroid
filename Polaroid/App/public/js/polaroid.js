@@ -31,12 +31,19 @@ $( document ).ready(function() {
         });
     });
     
+    /* Messages */
+    $('#link_messages').click(function() {
+        $('.content').load('../acc/files/messages.html');
+        $('#toggle_menu').hide( 400 );
+    });
+    
     /* Settings */
     $('#link_settings').click(function() {
         $('.content').load('../acc/files/settings.html');
         $('#toggle_menu').hide( 400 );
     });
     
+
     /* Default */
     if ($(".content").html() === ""){
         $('.content').load('../acc/files/feed.html', function(){
