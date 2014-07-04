@@ -30,6 +30,13 @@ $( document ).ready(function() {
             });
         });
     });
+    
+    /* Settings */
+    $('#link_settings').click(function() {
+        $('.content').load('../acc/files/settings.html');
+        $('#toggle_menu').hide( 400 );
+    });
+    
     /* Default */
     if ($(".content").html() === ""){
         $('.content').load('../acc/files/feed.html', function(){
