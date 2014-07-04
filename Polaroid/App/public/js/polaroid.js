@@ -39,7 +39,8 @@ $( document ).ready(function() {
     
     /* Profile */
     $('#link_profile').click(function() {
-        $('.content').load('../acc/files/profile.html');
+        $('.section_profile').load('../acc/files/profile.html')
+        $('.content').load('../acc/files/gallery.html');
         $('#toggle_menu').hide( 400 );
     });
     
