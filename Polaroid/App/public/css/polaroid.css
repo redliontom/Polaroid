@@ -179,7 +179,7 @@ nav.nav a:hover {
 /* Content*/
 .content_box {
     position: relative;
-    top: 1.0em;
+    top: 1.5em;
     width: 95%;
     margin: 0 auto;
     padding-bottom: 2.0em;
@@ -392,6 +392,22 @@ nav.nav a:hover {
     border: 0;
     font-size: 1.07em;
     color: #616161;
+}
+
+/* Profile */
+.wallpaper {
+    width: 100%;
+    height: 14em;
+    background: red;
+}
+
+.profile_inner {
+    padding: 0.8em 0;
+    padding-left: 15em;
+}
+
+.profile_inner i {
+    padding-left: 2.0em;
 }
 
 
