@@ -31,6 +31,18 @@ $( document ).ready(function() {
         });
     });
     
+    /* Upload */
+    $('#link_upload').click(function() {
+        $('.content').load('../acc/files/upload.html');
+        $('#toggle_menu').hide( 400 );
+    });
+    
+    /* Profile */
+    $('#link_profile').click(function() {
+        $('.content').load('../acc/files/profile.html');
+        $('#toggle_menu').hide( 400 );
+    });
+    
     /* Messages */
     $('#link_messages').click(function() {
         $('.content').load('../acc/files/messages.html');
@@ -40,6 +52,12 @@ $( document ).ready(function() {
     /* Settings */
     $('#link_settings').click(function() {
         $('.content').load('../acc/files/settings.html');
+        $('#toggle_menu').hide( 400 );
+    });
+    
+    /* Search */
+    $('#menu_search').click(function() {
+        $('.content').load('../acc/files/search.html');
         $('#toggle_menu').hide( 400 );
     });
     
