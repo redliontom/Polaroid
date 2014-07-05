@@ -5,8 +5,8 @@ create table public.user (
     email text unique,
     forename text,
     surname text,
-    privacy boolean,
-    status boolean
+    privacy boolean default false,
+    status boolean default false
 );
 
 drop table if exists public.friend cascade;
