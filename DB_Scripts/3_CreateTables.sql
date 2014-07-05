@@ -28,7 +28,7 @@ create table public.photo (
     iso text,
     focallength text,
     flash text,
-    time timestamp
+    time timestamp default current_timestamp
 );
 
 drop table if exists public.comment cascade;

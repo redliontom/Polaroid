@@ -49,7 +49,7 @@ function DataAccessLayer() {
         transaction('UPDATE public.user SET status=$2 where username=$1', [username, status], callback);
     };
 
-    this.trySetUserPassword = function (username, oldpw, newpw, callback) {
+    this.setUserPassword = function (username, oldpw, newpw, callback) {
         sql('SELECT func_change_user_password($1,$2,$3) AS result', [username, oldpw, newpw], function (error, frows) {
             if (error) {
                 callback(error, null);
@@ -178,6 +178,16 @@ function DataAccessLayer() {
         });
     };
 
+    this.getSingleMessage = function (id, callback) {
+        sql('SELECT * FROM public.message WHERE id=$1', [id], function (error, rows) {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, _message(rows[0]));
+            }
+        });
+    };
+
     this.sendMessage = function (from, to, subject, text, callback) {
         transaction('INSERT INTO public.message (fromuser, touser, subject, text) VALUES ($1,$2,$3,$4)', [from, to, subject, text], callback);
     };
@@ -201,6 +211,20 @@ function DataAccessLayer() {
             }
 
             callback(null, result);
+        });
+    };
+
+    this.getPhotoCommentCount = function (photo, callback) {
+        var query = '';
+        query += 'SELECT count(*) AS count FROM public.comment JOIN public.photo ON public.comment.photo = public.photo.id ';
+        query += 'WHERE public.photo.id=$1';
+
+        sql(query, [photo], function (error, rows) {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, rows[0].count);
+            }
         });
     };
 
@@ -280,8 +304,8 @@ function DataAccessLayer() {
 
     this.addPhoto = function (args, callback) {
         transaction(
-            'INSERT INTO public.photo (path, title, description, aperture, exposuretime, iso, focallength, flash, time) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
-            [args.path, args.title, args.description, args.aperture, args.exposuretime, args.iso, args.focallength, args.flash, args.time],
+            'INSERT INTO public.photo (path, title, description, aperture, exposuretime, iso, focallength, flash) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+            [args.path, args.title, args.description, args.aperture, args.exposuretime, args.iso, args.focallength, args.flash],
             callback);
     };
 
