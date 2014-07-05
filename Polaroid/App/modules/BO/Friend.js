@@ -1,4 +1,4 @@
-﻿function User() {
+﻿function Friend() {
     var _util = require('../Utility');
 
     if (_util.isNullOrUndefined(args)) {
@@ -35,30 +35,6 @@
         set: function (x) {
             if (_util.isString(x)) {
                 _surname = x;
-            }
-        },
-
-        enumerable: true
-    });
-
-    var _password = _util.isString(args.password) ? args.password : null;
-    Object.defineProperty(this, 'password', {
-        get: function () { return _password; },
-        set: function (x) {
-            if (_util.isString(x)) {
-                _password = x;
-            }
-        },
-
-        enumerable: true
-    });
-
-    var _privacy = _util.isBool(args.privacy) ? args.privacy : null;
-    Object.defineProperty(this, 'privacy', {
-        get: function () { return _privacy; },
-        set: function (x) {
-            if (_util.isBool(x)) {
-                _privacy = x;
             }
         },
 

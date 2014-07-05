@@ -19,24 +19,24 @@ function Message(args) {
         enumerable: true
     });
 
-    var _from = _util.isString(args.from) ? args.from : null;
-    Object.defineProperty(this, 'from', {
-        get: function () { return _from; },
+    var _fromuser = _util.isString(args.fromuser) ? args.fromuser : null;
+    Object.defineProperty(this, 'fromuser', {
+        get: function () { return _fromuser; },
         set: function (x) {
             if (_util.isString(x)) {
-                _from = x;
+                _fromuser = x;
             }
         },
 
         enumerable: true
     });
 
-    var _to = _util.isString(args.to) ? args.to : null;
-    Object.defineProperty(this, 'to', {
-        get: function () { return _to; },
+    var _touser = _util.isString(args.touser) ? args.touser : null;
+    Object.defineProperty(this, 'touser', {
+        get: function () { return _touser; },
         set: function (x) {
             if (_util.isString(x)) {
-                _to = x;
+                _touser = x;
             }
         },
 
