@@ -8,8 +8,8 @@ BEGIN
 END$$;
 
 --Rolle mit Login ist equivalent zu User
-CREATE ROLE admin 
-	PASSWORD 'admin'  
+CREATE ROLE polaroidadmin 
+	PASSWORD 'polaroid'  
 	NOSUPERUSER 
 	NOCREATEDB 
 	CREATEROLE 
@@ -18,7 +18,7 @@ CREATE ROLE admin
 
 CREATE DATABASE polaroid
 	WITH
-		OWNER admin
+		OWNER polaroidadmin
 		TEMPLATE template1
 		ENCODING 'UTF8'
 		TABLESPACE pg_default
