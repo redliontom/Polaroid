@@ -1,5 +1,5 @@
 {
-  "name": "ITP4",
+  "name": "Polaroid",
   "version": "0.0.0",
   "description": "Website for a photo club in Luxembourg",
   "main": "app.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redliontom/ITP4.git"
+    "url": "https://github.com/redliontom/Polaroid"
   },
   "author": {
     "name": "Tom Schalbar",
@@ -36,7 +36,7 @@
       "email": "d.wolf@live.at"
     },
     {
-      "name": "Christoph MÃ¼llner",
+      "name": "Christoph Müllner",
       "email": ""
     },
     {
