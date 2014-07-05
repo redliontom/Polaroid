@@ -2,7 +2,8 @@ function DataAccessLayer() {
     var _pg = require('pg');
     var _util = require('./Utility');
     var _sanitizer = require('sanitizer');
-    var _connection = 'postgres://admin:admin@localhost:5432/polaroid';
+    // postgres://username:password@localhost/database
+    var _connection = 'postgres://polaroidadmin:password@localhost:5432/polaroid';
 
     // BO
     var _user = require('./BO/User');
@@ -33,6 +34,52 @@ function DataAccessLayer() {
             }
 
             callback(null, result);
+        });
+    };
+
+    this.changeUserRealName = function (username, forename, surname, callback) {
+        sql('UPDATE public.user SET forename=$2, surname=$3 where username=$1', [username, forename, surname], callback);
+    };
+
+    this.changeUserMail = function (username, email, callback) {
+        sql('UPDATE public.user SET email=$2 where username=$1', [username, email], callback);
+    };
+
+    this.changeUserPrivacy = function (username, privacy, callback) {
+        sql('UPDATE public.user SET privacy=$2 where username=$1', [username, privacy], callback);
+    };
+
+    this.changeUserStatus = function (username, status, callback) {
+        sql('UPDATE public.user SET status=$2 where username=$1', [username, status], callback);
+    };
+
+    this.changeUserPassword = function (username, oldpw, newpw, callback) {
+        sql('SELECT func_change_user_password($1,$2,$3) AS result', [username, oldpw, newpw], function (error, frows) {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, frows[0].result);
+            }
+        });
+    };
+
+    this.verifyUserPassword = function (username, password, callback) {
+        sql('SELECT func_verify_user($1,$2) AS result', [username, password], function (error, frows) {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, frows[0].result);
+            }
+        });
+    };
+
+    this.toHash = function (text, callback) {
+        sql('SELECT func_hash($1) AS result', [text], function (error, frows) {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, frows[0].result);
+            }
         });
     };
 
