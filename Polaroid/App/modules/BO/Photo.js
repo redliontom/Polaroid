@@ -1,7 +1,4 @@
-﻿var Utility = require('../Utility');
-var Subject = require('../Patterns/Subject');
-
-function Image(args) {
+﻿function Image(args) {
     var _util = require('../Utility');
 
     if (_util.isNullOrUndefined(args)) {
@@ -26,6 +23,18 @@ function Image(args) {
         set: function (x) {
             if (_util.isString(x)) {
                 _user = x;
+            }
+        },
+
+        enumerable: true
+    });
+
+    var _path = _util.isString(args.path) ? args.path : null;
+    Object.defineProperty(this, 'path', {
+        get: function () { return _path; },
+        set: function (x) {
+            if (_util.isString(x)) {
+                _path = x;
             }
         },
 

@@ -20,6 +20,7 @@ drop table if exists public.photo cascade;
 create table public.photo (
     id serial primary key,
     username text references public.user (username),
+    path text,
     title text,
     description text,
     aperture text,

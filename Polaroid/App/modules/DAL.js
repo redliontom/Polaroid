@@ -23,7 +23,7 @@ function DataAccessLayer() {
         });
     };
 
-    this.getUserData = function (username, callback) {
+    this.getUserData = function (username, password, callback) {
         sql('SELECT * FROM public.user WHERE username=$1', [username], function (error, rows) {
             if (error) {
                 return callback(error, null);
@@ -69,10 +69,25 @@ function DataAccessLayer() {
         });
     };
 
+    this.addUser = function (username, password, callback) {
+        this.toHash(password, function (error, hash) {
+            if (error) {
+                callback(error, null);
+            } else {
+                transaction('INSERT INTO public.user (username, password) VALUES ($1,$2)', [username, hash], callback);
+            }
+        });
+    };
+
+    this.removeUser = function (username, callback) {
+        transaction('DELETE FROM public.user WHERE username=$1', [username], callback);
+    };
+
     this.getUserFriends = function (username, callback) {
-        var query = 'SELECT public.user.username, public.user.forename, public.user.surname ';
+        var query = 'SELECT public.user.username AS username, public.user.forename AS forname, ';
+        query += 'public.user.surname AS surname, public.friend.status AS status ';
         query += 'FROM public.user JOIN public.friend ON public.user.username = public.friend.user1 ';
-        query += 'WHERE public.friend.user1 = $1';
+        query += 'WHERE public.friend.user1=$1';
 
         sql(query, [username], function (error, rows) {
             if (error) {
@@ -90,32 +105,32 @@ function DataAccessLayer() {
     };
 
     this.addFriend = function (username, friendname, callback) {
-        transaction('INSERT INTO public.friend (user1, user2) VALUES ($1, $2)', [username, friendname], function (error, rows) {
+        transaction('INSERT INTO public.friend (user1, user2) VALUES ($1,$2)', [username, friendname], function (error, rows) {
             if (error) {
                 return callback(error, null);
             }
 
-            transaction('INSERT INTO public.friend (user1, user2) VALUES ($1, $2)', [friendname, username], callback);
+            transaction('INSERT INTO public.friend (user1, user2) VALUES ($1,$2)', [friendname, username], callback);
         });
     };
 
     this.removeFriend = function (username, friendname, callback) {
-        transaction('DELETE FROM public.friend WHERE public.friend.user1 = $1', [username], function (error, rows) {
+        transaction('DELETE FROM public.friend WHERE public.friend.user1=$1 AND public.friend.user2=$2', [username, friendname], function (error, rows) {
             if (error) {
                 return callback(error, null);
             }
 
-            transaction('DELETE FROM public.friend WHERE public.friend.user1 = $1', [friendname], callback);
+            transaction('DELETE FROM public.friend WHERE public.friend.user1=$1 AND public.friend.user2=$2', [friendname, username], callback);
         });
     };
 
     this.acceptFriend = function (username, friendname, callback) {
-        transaction('UPDATE public.friend SET status=TRUE WHERE public.friend.user1 = $1 AND public.friend.user2 = $2', [username, friendname], function (error, rows) {
+        transaction('UPDATE public.friend SET status=TRUE WHERE public.friend.user1=$1 AND public.friend.user2=$2', [username, friendname], function (error, rows) {
             if (error) {
                 return callback(error, null);
             }
 
-            transaction('UPDATE public.friend SET status=TRUE WHERE public.friend.user1 = $1 AND public.friend.user2 = $2', [friendname, username], callback);
+            transaction('UPDATE public.friend SET status=TRUE WHERE public.friend.user1=$1 AND public.friend.user2=$2', [friendname, username], callback);
         });
     };
 
@@ -124,7 +139,7 @@ function DataAccessLayer() {
         query += 'SELECT public.message.id AS id, public.message.fromuser AS fromuser, public.message.touser AS touser, ';
         query += 'public.message.subject AS subject, public.message.text AS text, public.message.time AS time ';
         query += 'FROM public.message JOIN public.user ON public.message.fromuser = public.user.username ';
-        query += 'WHERE public.user.username = $1 ORDER BY public.message.time DESC LIMIT $2 OFFSET $3';
+        query += 'WHERE public.user.username=$1 ORDER BY public.message.time DESC LIMIT $2 OFFSET $3';
 
         sql(query, [username, limit, offset], function (error, rows) {
             if (error) {
@@ -146,7 +161,7 @@ function DataAccessLayer() {
         query += 'SELECT public.message.id AS id, public.message.fromuser AS fromuser, public.message.touser AS touser, ';
         query += 'public.message.subject AS subject, public.message.text AS text, public.message.time AS time ';
         query += 'FROM public.message JOIN public.user ON public.message.touser = public.user.username ';
-        query += 'WHERE public.user.username = $1 ORDER BY public.message.time DESC LIMIT $2 OFFSET $3';
+        query += 'WHERE public.user.username=$1 ORDER BY public.message.time DESC LIMIT $2 OFFSET $3';
 
         sql(query, [username, limit, offset], function (error, rows) {
             if (error) {
@@ -161,6 +176,10 @@ function DataAccessLayer() {
 
             callback(null, result);
         });
+    };
+
+    this.sendMessage = function (from, to, subject, text, callback) {
+        transaction('INSERT INTO public.message (fromuser, touser, subject, text) VALUES ($1,$2,$3,$4)', [from, to, subject, text], callback);
     };
 
     this.getPhotoComments = function (photo, limit, offset, callback) {
@@ -227,6 +246,43 @@ function DataAccessLayer() {
                 });
             }
         });
+    };
+
+    this.addPhotoComment = function (photo, user, comment, callback) {
+        transaction('INSERT INTO public.comment (photo, username, comment) VALUES ($1,$2,$3)', [photo, user, comment], callback);
+    };
+
+    this.getPhotosFromUser = function (username, callback) {
+        sql('SELECT id FROM public.photo WHERE user=$1', [username], function (error, rows) {
+            if (error) {
+                return callback(error, null);
+            }
+
+            var result = [];
+
+            for (var i in rows) {
+                result.push(rows[i].id);
+            }
+
+            callback(null, result);
+        });
+    };
+
+    this.getPhotoData = function (id, callback) {
+        sql('SELECT * FROM public.photo WHERE id=$1', [id], function (error, rows) {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, _photo(rows[0]));
+            }
+        });
+    };
+
+    this.addPhoto = function (args, callback) {
+        transaction(
+            'INSERT INTO public.photo (path, title, description, aperture, exposuretime, iso, focallength, flash, time) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
+            [args.path, args.title, args.description, args.aperture, args.exposuretime, args.iso, args.focallength, args.flash, args.time],
+            callback);
     };
 
     this.toHash = function (text, callback) {
