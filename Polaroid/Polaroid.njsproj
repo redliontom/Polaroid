@@ -35,6 +35,7 @@
     <Compile Include="App\Facade.js" />
     <Compile Include="App\Modules\BL.js" />
     <Compile Include="App\Modules\BO\Comment.js" />
+    <Compile Include="App\Modules\BO\Friend.js" />
     <Compile Include="App\Modules\BO\Message.js" />
     <Compile Include="App\Modules\BO\Photo.js" />
     <Compile Include="App\Modules\BO\User.js" />
